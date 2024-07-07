@@ -1,29 +1,44 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Toastify from 'toastify-js'
-import gearLoad from '../components/assets/Gear-0.2s-264px.svg'
 
 export default function Detail({ url }) {
-    const [product, setProduct] = useState("")
+    const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(false)
     const { id } = useParams()
 
     async function fetchProduct() {
         try {
-            setLoading(true)
-            // /public/products?sort=createdAt&category=3&author=1&search=&page[data]=2&page[number]=1
-            const { data } = await axios.get(`${url}/apis/pub/branded-things/products/${id}`);
-            // const { data } = await axios.get(`${url}/apis/pub/branded-things/products/${id}`);
-            setProduct(data.data);
-        } catch (error) {
+            const {data} = await axios.get(`${url}/public/products/${id}`)
+            setProduct(data.products)
+            // console.log(id);
+            // console.log(data.products);
             Toastify({
-                text: error.response.data.error,
+                text: `here's the detail for product with id ${id}`,
                 duration: 2000,
                 newWindow: true,
                 close: true,
                 gravity: "bottom",
                 position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: "#00B29F",
+                    color: "#17202A",
+                    boxShadow: "0 5px 10px black",
+                    fontWeight: "bold"
+                }
+            }).showToast();
+        } catch (error) {
+            console.log(error, "eror disini");
+            Toastify({
+                text: error.message,
+                duration: 2000,
+                newWindow: true,
+                close: true,
+                gravity: "top",
+                position: "left",
                 stopOnFocus: true,
                 style: {
                     background: "#EF4C54",
@@ -32,43 +47,45 @@ export default function Detail({ url }) {
                     fontWeight: "bold"
                 }
             }).showToast();
-        } finally {
-            setLoading(false)
         }
     }
 
     useEffect(() => {
-        fetchProduct();
+        fetchProduct()
     }, [])
 
     return (
         <>
-            {loading ? (
-                <>
+            <main className="px-10 my-8">
+                {loading ? (
                     <div className="mt-32 flex justify-center items-center">
                         <img src={gearLoad} />
                     </div>
-                </>
-            ) : (
-                <>
-                    <div className="p-20 bg-gray-100 shadow-2xl flex flex-row">
-                        <figure className="flex flex-1">
-                            <img
-                                src={product.imgUrl}
-                                alt="product image"
-                                className="w-1/2 ml-20 rounded-xl"
-                            />
-                        </figure>
-                        <div className="flex flex-1 flex-col">
-                            <b className="mb-5 text-left">{product.name}</b>
-                            <p className="text-left">
-                                {product.description}
-                            </p>
+                ) : (
+                    <div className="flex flex-col bg-base-100 my-6 items-center p-20  bg-gray-100 shadow">
+                        <img
+                            src={product.imgUrl}
+                            className="max-w-sm rounded-lg shadow mb-5"
+                        />
+                        <div className="flex-col">
+                            <div>
+                                <div className="texts">
+                                    <h1 className="text-5xl font-bold text-accent-focus">{product.name}</h1>
+                                    <div className="py-6">
+                                        <p>{product.description}</p>
+                                        <br></br>
+                                        <p>Stock: {product.stock}</p>
+                                        <p>Price: {product.price}</p>
+                                    </div>
+                                </div>
+                                <div className="buttons">
+                                    <Link to="/"><button className="btn btn-accent">Back</button></Link>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </>
-            )}
-
+                )}
+            </main>
         </>
     )
 }

@@ -1,7 +1,7 @@
 import Card from "../components/Card";
 import axios from 'axios';
-import { useEffect, useState } from "react";
 import Toastify from 'toastify-js'
+import { useEffect, useState } from "react";
 import gearLoad from '../components/assets/Gear-0.2s-264px.svg'
 import Paging from "../components/Paging";
 
@@ -18,14 +18,8 @@ export default function HomePage({ url }) {
     async function fetchProducts() {
         try {
             setLoading(true)
-            // const { data } = await axios.get(`${url}/apis/pub/branded-things/products/${id}`);
-            // /public/products?sort=createdAt&category=3&author=1&search=&page[data]=2&page[number]=1
-            // const { data } = await axios.get(`${url}public/products?sort=createdAt&category=3&author=1&${search}&page[data]=2&page[number]=1`);
-            const { data } = await axios.get(`${url}public/products?${search}`);
-
-            // const { data } = await axios.get(`${url}/apis/pub/branded-things/products?q=${search}&limit=8&page=1&sort=ASC`);
-            // setProducts(data.data.query);
-            console.log(data.data, 'sdfghjk');
+            const { data } = await axios.get(`${url}/public/products?search=${search}`);
+            // console.log(data.data, 'ini data public');
             setProducts(data.data);
 
         } catch (error) {
@@ -84,7 +78,7 @@ export default function HomePage({ url }) {
                 )}
 
                 <div className="flex justify-centre w-screen">
-                    <Paging/>
+                    <Paging />
                 </div>
             </div >
         </>

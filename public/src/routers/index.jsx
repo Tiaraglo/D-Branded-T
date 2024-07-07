@@ -4,12 +4,10 @@ import BaseLayout from "../views/BaseLayout";
 import Detail from "../views/Detail";
 import AboutUs from '../components/AboutUs'
 
-const url = 'https://server.yoelk20.tech/'
+const url = 'https://server.yoelk20.tech'
 
 const router = createBrowserRouter([
   {
-    // path: "/",
-    // element: <HomePage url={url}/>,
     element: <BaseLayout />,
     children: [
       {
@@ -21,8 +19,8 @@ const router = createBrowserRouter([
         element: <AboutUs/>
       },
       {
-        path: '/detail/:id',
-        element: <Detail/>
+        path: '/public/products/:id',
+        element: <Detail url={url}/>
       }
     ]
   },

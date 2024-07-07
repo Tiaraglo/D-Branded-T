@@ -1,12 +1,10 @@
 import Toastify from 'toastify-js'
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'
-// import AboutUs from './AboutUs';
 
 
 
 export default function Nav({ setPage }) {
-    // const [about, setAbout] = useState('')
     const [products, setProducts] = useState([]);
     const navigate = useNavigate()
 
@@ -17,36 +15,6 @@ export default function Nav({ setPage }) {
     function publicHome() {
         navigate('/')
     }
-
-    async function fetchProducts() {
-        try {
-            setLoading(true)
-            const { data } = await axios.get(`${url}/apis/pub/branded-things/products?q=${search}&limit=8&page=1&sort=ASC`);
-            setProducts(data.data.query);
-        } catch (error) {
-            Toastify({
-                text: error.response.data.error,
-                duration: 2000,
-                newWindow: true,
-                close: true,
-                gravity: "bottom",
-                position: "right",
-                stopOnFocus: true,
-                style: {
-                    background: "#EF4C54",
-                    color: "#17202A",
-                    boxShadow: "0 5px 10px black",
-                    fontWeight: "bold"
-                }
-            }).showToast();
-        } finally {
-            setLoading(false)
-        }
-    }
-
-    useEffect(() => {
-        fetchProducts();
-    }, [])
 
     return (<>
         <title>D'Branded T</title>
