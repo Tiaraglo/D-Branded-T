@@ -1,5 +1,64 @@
+import { useState } from "react";
+import axios from "axios";
 
-export default function AddUserPage() {
+export default function AddUserPage({ url }) {
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState();
+    const [address, setAddress] = useState("");
+
+    // console.log(url, 'ini');
+    async function addUser() {
+        try {
+            const data = {
+                username,
+                email,
+                password,
+                phoneNumber,
+                address,
+            }
+
+            let response = await axios.post(`${url}/add-user`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.access_token}`
+                }
+            }, data)
+
+            Toastify({
+                text: `here's the detail for product with id ${id}`,
+                duration: 2000,
+                newWindow: true,
+                close: true,
+                gravity: "bottom",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: "#00B29F",
+                    color: "#17202A",
+                    boxShadow: "0 5px 10px black",
+                    fontWeight: "bold"
+                }
+            }).showToast();
+
+            console.log(response);
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    addUser()
+
+    async function handleSubmit(e) {
+        try {
+            e.preventDefault();
+            await addUser()
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
 
@@ -30,14 +89,15 @@ export default function AddUserPage() {
                                 <p className="text-gray-500">'Hello Admin, please add an account'.</p>
                             </div>
                             <div className="space-y-5">
-                            <div className="space-y-2">
+                                <div className="space-y-2">
                                     <label className="mb-5 text-sm font-medium text-gray-700 tracking-wide">
-                                    Username
+                                        Username
                                     </label>
                                     <input
                                         className="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
                                         type="username"
                                         placeholder="Enter an username"
+                                        onChange={(e) => { setUsername(e.target.value); }}
                                     // onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </div>
@@ -49,7 +109,7 @@ export default function AddUserPage() {
                                         className=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
                                         type="email"
                                         placeholder="mail@gmail.com"
-                                    // onChange={(e) => setEmail(e.target.value)}
+                                        onChange={(e) => setEmail(e.target.value)}
                                     />
                                 </div>
                                 <div className="space-y-2">
@@ -60,7 +120,7 @@ export default function AddUserPage() {
                                         className="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
                                         type="phoneNumber"
                                         placeholder="Enter phoneNumber"
-                                    // onChange={(e) => setPassword(e.target.value)}
+                                        onChange={(e) => setPhoneNumber(e.target.value)}
                                     />
                                 </div>
 
@@ -72,7 +132,7 @@ export default function AddUserPage() {
                                         className="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
                                         type="address"
                                         placeholder="Enter address"
-                                    // onChange={(e) => setPassword(e.target.value)}
+                                        onChange={(e) => setAddress(e.target.value)}
                                     />
                                 </div>
 
@@ -84,14 +144,14 @@ export default function AddUserPage() {
                                         className="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400"
                                         type="password"
                                         placeholder="Enter password"
-                                    // onChange={(e) => setPassword(e.target.value)}
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </div>
 
 
                                 <div>
                                     <button
-                                        // onClick={handleLogin}
+                                        onSubmit={handleSubmit}
                                         type="submit"
                                         className="w-full flex justify-center bg-green-400  hover:bg-green-500 text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500"
                                     >
@@ -117,6 +177,7 @@ export default function AddUserPage() {
                     </div>
                 </div>
             </div>
+
         </>
     )
 }

@@ -9,6 +9,7 @@ export default function Home({ url }) {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+    // let access_token = localStorage.access_token 
 
     async function fetchProducts() {
         try {
@@ -111,15 +112,15 @@ export default function Home({ url }) {
                             <table class="table-fixed">
                                 <thead>
                                     <tr >
-                                        <th className="w-1/9 px-2 py-2 border px-4 text-black text-base" >Id</th>
-                                        <th className="w-1/6 px-4 py-2 border px-4 text-black text-base">Name</th>
-                                        <th className="w-1/4 px-4 py-2 border px-4 text-black text-base">Image</th>
-                                        <th className="w-1/4 px-4 py-2 border px-4 text-black text-base">Description</th>
-                                        <th className="w-1/9 px-2 py-2 border px-4 text-black text-base">Price</th>
-                                        <th className="w-1/10 px-2 py-2 border px-4 text-black text-base">ImageUrl</th>
-                                        <th className="w-1/8 px-2 py-2 border px-4 text-black text-base">Stock</th>
-                                        <th className="w-1/10 px-4 py-2 border px-4 text-black text-base">AuthorId</th>
-                                        <th className="w-1/7 px-4 py-2 border px-4 text-black text-base">Action</th>
+                                        <th className="w-1/9 px-2 py-2 border px-4 text-black text-xl" >Id</th>
+                                        <th className="w-1/6 px-4 py-2 border px-4 text-black text-xl">Name</th>
+                                        <th className="w-1/4 px-4 py-2 border px-4 text-black text-xl">Image</th>
+                                        <th className="w-1/4 px-4 py-2 border px-4 text-black text-xl">Description</th>
+                                        <th className="w-1/9 px-2 py-2 border px-4 text-black text-xl">Price</th>
+                                        <th className="w-1/10 px-2 py-2 border px-4 text-black text-xl">ImageUrl</th>
+                                        <th className="w-1/8 px-2 py-2 border px-4 text-black text-xl">Stock</th>
+                                        <th className="w-1/10 px-4 py-2 border px-4 text-black text-xl">AuthorId</th>
+                                        <th className="w-1/7 px-4 py-2 border px-4 text-black text-xl">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -131,7 +132,7 @@ export default function Home({ url }) {
                                                 <td className="border px-4 py-2"><img src={product.imgUrl} /></td>
                                                 <td className="border px-4 py-2">{product.description}</td>
                                                 <td className="border px-2 py-2">Rp.{product.price}</td>
-                                                <td className="border px-2 py-2"><Link><button className="btn btn-error btn-sm" > Edit Image <i class="fa-solid fa-pen-to-square"></i></button></Link></td>
+                                                <td className="border px-2 py-2"><button onClick={() => navigate(`/editImg/${product.id}`)}  className="btn btn-error btn-sm" > Edit Image <i class="fa-solid fa-pen-to-square"></i></button></td>
                                                 <td className="border px-2 py-2">{product.stock}</td>
                                                 <td className="border px-4 py-2">{product.authorId}</td>
                                                 <td><button onClick={() => navigate(`/edit/${product.id}`)} className="btn btn-warning btn-sm ">Edit</button>

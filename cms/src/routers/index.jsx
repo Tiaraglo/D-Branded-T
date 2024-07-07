@@ -8,6 +8,7 @@ import EditProductPage from "../views/EditProductPage";
 import AddUserPage from "../views/AddUserPage";
 import CategoriesList from "../views/CategoriesList";
 import DetailProduct from "../views/DetailProduct";
+import EditImg from "../views/EditImg";
 
 
 
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
             {
                 path: '/detail/:id',
                 element: <DetailProduct url={url}/>
+            },
+            {
+                path: '/editImg/:id',
+                element: <EditImg url={url}/>
             },
             {
                 path: '/add-user',

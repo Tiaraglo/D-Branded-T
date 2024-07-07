@@ -2,7 +2,7 @@ import Toastify from 'toastify-js'
 import { useNavigate, Link } from 'react-router-dom'
 
 
-export default function Nav({ setPage }) {
+export default function Nav() {
     const navigate = useNavigate()
 
     function handleLogout() {
