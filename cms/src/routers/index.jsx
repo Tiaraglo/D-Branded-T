@@ -74,27 +74,27 @@ const router = createBrowserRouter([
             },
             {
                 path: '/add',
-                element: <AddProductPage url={url}/>
+                element: <AddProductPage url={url} />
             },
             {
                 path: '/edit/:id',
-                element: <EditProductPage url={url}/>
+                element: <EditProductPage url={url} />
             },
             {
                 path: '/detail/:id',
-                element: <DetailProduct url={url}/>
+                element: <DetailProduct url={url} />
             },
             {
                 path: '/editImg/:id',
-                element: <EditImg url={url}/>
+                element: <EditImg url={url} />
             },
             {
                 path: '/add-user',
-                element: <AddUserPage url={url}/>
+                element: <AddUserPage url={url} />
             },
             {
                 path: '/categories',
-                element: <CategoriesList url={url}/>
+                element: <CategoriesList url={url} />
             }
 
         ]
