@@ -80,17 +80,17 @@ List of endpoints:
 
 - `path : "/"` 
       {
-        element: HomePage for public that have card of info for each products
+        desc: HomePage for public that have card of info for each products
       }
 
 - `path : "/about"` 
       {
-        element: a brief information about the website brand
+        desc: a brief information about the website brand
       }
 
 - `path : "/public/products/:id"` 
       {
-        element: detail to get info for a spesific product, by id
+        desc: detail to get info for a spesific product, by id
       } 
 
 
