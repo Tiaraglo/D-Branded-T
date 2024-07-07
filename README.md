@@ -34,9 +34,9 @@ List of endpoints:
 - For CMS Site
 
 - `path : "/login"`
-            `{
+            {
                 desc: Admin that have a authentication or token, can login for managing the product data,
-            }`
+            }
             
             
 - `path : "/"`
@@ -45,13 +45,11 @@ List of endpoints:
             }
 
 - `path : "/add"`
-
             {
                 desc : to add new product
             }
 
 - `path : "/edit/:id"`
-
             {
                 desc : to edit one product
             }
